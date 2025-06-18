@@ -21,6 +21,7 @@ public class SecurityConfiguration {
         http
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/pizzas/create", "/pizzas/edit/**").hasAuthority("ADMIN")
+                .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
                 .requestMatchers("/ingredients", "/ingredients/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER", "ADMIN")
