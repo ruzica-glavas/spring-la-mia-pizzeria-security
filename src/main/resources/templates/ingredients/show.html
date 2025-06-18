@@ -16,7 +16,7 @@
                 <div class="card h-100 show-card">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${ingredient.name}">Nome</h5>
-                    <span th:text="'ID: ' + ${ingredient.id}"></span>
+                    <span th:text="'ID: ' + ${ingredient.id}" sec:authorize="hasAuthority('ADMIN')"></span>
                     <p class="card-text" th:text="${ingredient.description}">Descrizione</p>
                 </div>
             </div>

@@ -12,7 +12,7 @@
     <h1>Ingredienti disponibili</h1>
 
     <div class="text-center p-4 my-2">
-        <a class="btn btn-outline-primary" th:href="@{/ingredients/create}" role="button">Crea i tuoi ingredienti!</a>
+        <a class="btn btn-outline-primary" th:href="@{/ingredients/create}" role="button" sec:authorize="hasAuthority('ADMIN')">Crea i tuoi ingredienti!</a>
     </div> 
 
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${ingredients.size()>0}">
@@ -20,15 +20,15 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${ingredient.name}">Nome</h5>
-                    <span th:text="'ID: ' + ${ingredient.id}"></span>
+                    <span th:text="'ID: ' + ${ingredient.id}" sec:authorize="hasAuthority('ADMIN')"></span>
                     <!-- <p class="card-text" th:text="${ingredient.description}">Descrizione</p> -->
                 </div>
 
                 <div class="card-footer text-center">
                     <div class="d-flex justify-content-center gap-2 my-2">
                         <a class="btn btn-outline-primary" th:href="@{/ingredients/{id}(id=${ingredient.id})}" role="button">Dettaglio</a>
-                        <a class="btn btn-outline-info" th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}" role="button">Modifica</a>
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:attr="data-bs-target='#delete-modal-' + ${ingredient.id}">Elimina
+                        <a class="btn btn-outline-info" th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}" role="button" sec:authorize="hasAuthority('ADMIN')">Modifica</a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:attr="data-bs-target='#delete-modal-' + ${ingredient.id}" sec:authorize="hasAuthority('ADMIN')">Elimina
                         </button>
 
                         <!-- Modal -->

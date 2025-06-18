@@ -11,12 +11,18 @@
 
 <div class="container mt-4">
 
+    <div class="mb-3">
+        <h3>
+            Welcome, <span sec:authentication="name"></span>
+        </h3>
+    </div>
+
     <form class="d-flex" role="search" method="get" th:action="@{/pizzas}">
         <input class="form-control me-2" type="search" name="name" placeholder="Cerca la tua pizza" aria-label="Search" th:value="${name}"/>
         <button class="btn btn-outline-primary" type="submit">Cerca</button>
     </form>
 
-    <div class="text-center p-4 my-2">
+    <div class="text-center p-4 my-2" sec:authorize="hasAuthority('ADMIN')">
         <a class="btn btn-outline-primary" th:href="@{/pizzas/create}" role="button">Crea la tua nuova Pizza!</a>
     </div> 
 
@@ -34,15 +40,15 @@
 
                 <div class="card-footer text-center">
                     <div class="d-flex justify-content-center gap-2 my-2">
-                        <a class="btn btn-outline-success" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">Offerta</a>
+                        <a class="btn btn-outline-success" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button" sec:authorize="hasAuthority('ADMIN')">Offerta</a>
                         <a class="btn btn-outline-primary" th:href="@{/pizzas/{id}(id=${pizza.id})}" role="button">Dettaglio</a>
-                        <a class="btn btn-outline-info" th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" role="button">Modifica</a>
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:attr="data-bs-target='#delete-modal-' + ${pizza.id}">Elimina
+                        <a class="btn btn-outline-info" th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" role="button" sec:authorize="hasAuthority('ADMIN')">Modifica</a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:attr="data-bs-target='#delete-modal-' + ${pizza.id}" sec:authorize="hasAuthority('ADMIN')">Elimina
                         </button>
 
                         <!-- Modal -->
                          <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" sec:authorize="hasAuthority('ADMIN')">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
