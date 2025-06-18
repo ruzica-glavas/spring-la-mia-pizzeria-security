@@ -65,7 +65,7 @@
                 <h4>Al momento non ci sono offerte disponibili!</h4>
             </div>
             <div class="col-12 text-center mb-2">
-                <a class="btn btn-outline-success  w-30" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button">Crea la tua offerta speciale</a> 
+                <a class="btn btn-outline-success  w-30" th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" role="button" sec:authorize="hasAuthority('ADMIN')">Crea la tua offerta speciale</a> 
             </div>
         </div>
 

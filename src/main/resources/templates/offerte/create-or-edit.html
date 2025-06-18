@@ -12,7 +12,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h1 class="mb-4">Crea la tua offerta della pizza [[${offerta.pizza.getName()}]]!</h1> 
+                <h1 class="mb-4" sec:authorize="hasAuthority('ADMIN')">Crea la tua offerta della pizza [[${offerta.pizza.getName()}]]!</h1> 
                 <form id="pizza-form" th:object="${offerta}" th:action="${edit} ? @{/offerte/edit/{id}(id=${offerta.id})} : @{/offerte/create}" method="post">
 
                     <input type="hidden" th:field="${offerta.pizza.id}" id="linked-pizza">

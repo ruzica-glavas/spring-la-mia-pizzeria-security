@@ -22,7 +22,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/pizzas/create", "/pizzas/edit/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
-                .requestMatchers("/ingredients", "/ingredients/**").hasAuthority("ADMIN")
+                .requestMatchers("/ingredients", "/ingredients/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll()
                 )
